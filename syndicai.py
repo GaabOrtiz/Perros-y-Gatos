@@ -31,7 +31,19 @@ class PythonPredictor:
         self.model = load_model(args["model"])
 
     def predict(self, payload):
-
+###COLAB###
+        from keras.utils import load_img, img_to_array
+        img = load_img(path, target_size=(64,64))
+        img_tensor = img_to_array(img)
+        img_tensor = np.expand_dims(img_tensor, axis=0)
+        img_tensor /= 255
+        print(img_tensor.shape)
+        
+   ####Inside Model###     
+      img = Image.open(payload["image"].file)
+        print(img.size)  # prints the dimensions of image.png  
+       
+    
         # Get image from url
         try: 
             image = url_to_image(payload["image_url"])
